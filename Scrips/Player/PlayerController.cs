@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     //Variáveis de movimento
     [SerializeField]
-    public float moveSpeed = 5f;
+    public float moveSpeed = 10f;
     public void Move(){
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");

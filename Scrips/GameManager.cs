@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
         CycleTimer = 20f;
         CycleFinished = false;
         while(CycleTimer>0){
-            //Debug.Log(CycleTimer);
             CycleTimer -= Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -75,58 +74,83 @@ public class GameManager : MonoBehaviour
     public FotonPodium fotonPodium;
     public GasPodium gasPodium;
     public WaterPodium waterPodium;    
+
+    private float energyFinal = -0.1f;
+    public float GetEnergyFinal(){
+        return energyFinal;
+    }
+    private void SetEnergyFinal(float amount){
+        energyFinal = amount;
+    }
     private float EnergyMath(){
-        float final = -0.2f + airPodium.AirEnergyShare() + fotonPodium.FotonEnergyShare() + waterPodium.WaterEnergyShare();
+        float energyFinal = -0.1f + airPodium.AirEnergyShare() + fotonPodium.FotonEnergyShare() + waterPodium.WaterEnergyShare();
         if (academyBuilt){
-            final += 0.1f;
+            energyFinal += 0.1f;
         }else if ( statueBuilt ){
-            final += 0.1f;
+            energyFinal += 0.1f;
         }else if ( farmBuilt ){
-            final -= 0.15f;
+            energyFinal -= 0.15f;
         }else if ( ghBuilt ){
-            final -= 0.2f;
+            energyFinal -= 0.2f;
         }else if ( labBuilt ){
-            final -= 0.3f;
+            energyFinal -= 0.3f;
         }else if ( residencialBuilt ){
-            final -= 0.35f;
+            energyFinal -= 0.35f;
         }
-        return final;
+        SetEnergyFinal(energyFinal);
+        return energyFinal;
     }
 
+    private float airFinal = -0.1f;
+    public float GetAirFinal(){
+        return airFinal;
+    }
+    private void SetAirFinal(float amount){
+        airFinal = amount;
+    }
     private float AirMath(){
-        float final = -0.2f + fotonPodium.FotonAirShare() + airPodium.AirAirShare() + gasPodium.GasAirShare();
+        float airFinal = -0.1f + fotonPodium.FotonAirShare() + airPodium.AirAirShare() + gasPodium.GasAirShare();
         if (academyBuilt){
-            final += 0.1f;
+            airFinal += 0.1f;
         }else if ( statueBuilt ){
-            final += 0.1f;
+            airFinal += 0.1f;
         }else if ( farmBuilt ){
-            final -= 0.15f;
+            airFinal -= 0.15f;
         }else if ( ghBuilt ){
-            final += 0.2f;
+            airFinal += 0.2f;
         }else if ( labBuilt ){
-            final -= 0.3f;
+            airFinal -= 0.3f;
         }else if ( residencialBuilt ){
-            final -= 0.35f;
+            airFinal -= 0.35f;
         }
-        return final;
+        SetAirFinal(airFinal);
+        return airFinal;
     }
 
+    private float waterFinal = -0.1f;
+    public float GetWaterFinal(){
+        return waterFinal;
+    }
+    private void SetWaterFinal(float amount){
+        waterFinal = amount;
+    }
     private float WaterMath(){
-        float final = -0.2f + waterPodium.WaterWaterShare();
+        float waterFinal = -0.1f + waterPodium.WaterWaterShare();
         if (academyBuilt){
-            final += 0.1f;
+            waterFinal += 0.1f;
         }else if ( statueBuilt ){
-            final += 0.1f;
+            waterFinal += 0.1f;
         }else if ( farmBuilt ){
-            final += 0.15f;
+            waterFinal += 0.15f;
         }else if ( ghBuilt ){
-            final += 0.2f;
+            waterFinal += 0.2f;
         }else if ( labBuilt ){
-            final -= 0.3f;
+            waterFinal -= 0.3f;
         }else if ( residencialBuilt ){
-            final -= 0.35f;
+            waterFinal -= 0.35f;
         }
-        return final;
+        SetWaterFinal(waterFinal);
+        return waterFinal;
     }
 
     public int GetAirSlugValue(){
